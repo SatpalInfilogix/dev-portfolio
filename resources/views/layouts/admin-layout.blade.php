@@ -16,6 +16,8 @@
     <link href="{{ asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
     <!-- App js -->
     <script src="{{ asset('assets/js/plugin.js') }}"></script>
+    <!-- JQuery -->
+    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
 </head>
 
 <body data-sidebar="dark">
@@ -74,7 +76,6 @@
                                 <span key="t-profile">Profile</span>
                             </a>
                             <a class="dropdown-item d-block" href="#">
-                                <span class="badge bg-success float-end">11</span>
                                 <i class="bx bx-wrench font-size-16 align-middle me-1"></i>
                                 <span key="t-settings">Settings</span>
                             </a>
@@ -107,7 +108,7 @@
                         </li>
 
                         <li>
-                            <a href="#" class="waves-effect">
+                            <a href="{{ route('projects.index') }}" class="waves-effect">
                                 <i class="bx bx-briefcase-alt-2"></i>
                                 <span key="t-dashboards">My Projects</span>
                             </a>
@@ -174,7 +175,6 @@
     <!-- END layout-wrapper -->
 
     <!-- JAVASCRIPT -->
-    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
     <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
@@ -182,6 +182,7 @@
 
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    
+    @yield('script')
 </body>
-
 </html>
