@@ -15,7 +15,7 @@
     <!-- App Css-->
     <link href="{{ asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
-    @yield('style')
+    @stack('styles')
 
     <!-- App js -->
     <script src="{{ asset('assets/js/plugin.js') }}"></script>
@@ -198,7 +198,6 @@
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
 
-    @yield('script')
+    @stack('scripts')
 </body>
-
 </html>

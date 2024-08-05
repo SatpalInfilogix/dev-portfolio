@@ -22,8 +22,11 @@
                         <!-- end col -->
                         <div class="col-sm-auto">
                             <div class="text-sm-end">
-                                <a href="projects-create.html" class="btn btn-success btn-rounded" id="addProject-btn"><i
-                                        class="mdi mdi-plus me-1"></i> Add New Project</a>
+                                <a href="{{ route('projects.create') }}" class="btn btn-success btn-rounded"
+                                    id="addProject-btn">
+                                    <i class="mdi mdi-plus me-1"></i>
+                                    Add New Project
+                                </a>
                             </div>
                         </div>
                         <!-- end col -->
@@ -31,9 +34,8 @@
                     <!-- end row -->
                     <div class="">
                         <div class="table-responsive">
-                            <table
-                                class="table project-list-table align-middle table-nowrap dt-responsive nowrap w-100 table-borderless"
-                                id="projectList-table">
+                            <table id="projectList-table"
+                                class="table project-list-table align-middle table-nowrap dt-responsive nowrap w-100 table-borderless">
                                 <thead class="table-light">
                                     <tr>
                                         <th scope="col" style="width: 60px">#</th>
@@ -62,8 +64,9 @@
             <!-- end card -->
         </div>
     </div>
+    
+    <x-include-plugins :plugins="['dataTable']" />
 
-    <x-include-plugin dataTable=""></x-include-plugin>
     <script>
         $(function() {
             $("#projectList-table").DataTable()

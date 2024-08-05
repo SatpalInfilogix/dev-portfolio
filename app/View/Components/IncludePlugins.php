@@ -6,16 +6,22 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class IncludePlugin extends Component
+class IncludePlugins extends Component
 {
-    public $dataTable;
+    public $plugins;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($dataTable = null)
+    public function __construct(array $plugins = [])
     {
-        $this->dataTable = $dataTable;
+        $this->plugins = $plugins;
+    }
+
+    
+    public function hasPlugin($pluginName)
+    {
+        return in_array($pluginName, $this->plugins);
     }
 
     /**
@@ -23,6 +29,6 @@ class IncludePlugin extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.include-plugin');
+        return view('components.include-plugins');
     }
 }
