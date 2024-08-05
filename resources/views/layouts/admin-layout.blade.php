@@ -14,6 +14,9 @@
     <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{ asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+
+    @yield('style')
+
     <!-- App js -->
     <script src="{{ asset('assets/js/plugin.js') }}"></script>
     <!-- JQuery -->
@@ -145,6 +148,18 @@
 
             <div class="page-content">
                 <div class="container-fluid">
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0 font-size-18">
+                                    @yield('title')
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
                     @yield('content')
                 </div>
                 <!-- container-fluid -->
@@ -182,7 +197,8 @@
 
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
-    
+
     @yield('script')
 </body>
+
 </html>
