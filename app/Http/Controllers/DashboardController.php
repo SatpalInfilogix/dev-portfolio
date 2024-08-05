@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function index(){
-        echo 'here!';
+        return view('admin.dashboard.index');
     }
 
     public function redirectToDashboard(){
