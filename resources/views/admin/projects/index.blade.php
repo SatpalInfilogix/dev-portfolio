@@ -39,23 +39,13 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th scope="col" style="width: 60px">#</th>
-                                        <th scope="col">Projects</th>
-                                        <th scope="col">Due Date</th>
+                                        <th scope="col">Project Title</th>
+                                        <th scope="col">Technologies Used</th>
                                         <th scope="col">Status</th>
-                                        <th scope="col">Team</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>#</td>
-                                        <td>Projects</td>
-                                        <td>Due Date</td>
-                                        <td>Status</td>
-                                        <td>Team</td>
-                                        <td>Action</td>
-                                    </tr>
-                                </tbody>
+                                <tbody></tbody>
                             </table>
                         </div>
                     </div>
@@ -64,12 +54,68 @@
             <!-- end card -->
         </div>
     </div>
-    
+
     <x-include-plugins :plugins="['dataTable']" />
 
     <script>
         $(function() {
-            $("#projectList-table").DataTable()
+            let table = $("#projectList-table").DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    "url": "{{ route('projects.get') }}",
+                    "type": "POST",
+                    data: function(d) {
+                        d._token = '{{ csrf_token() }}';
+                        d.search = $('#searchTableList').val();
+                    },
+                    error: function(xhr, error, thrown) {
+                        alert("An error occurred while fetching data. Please try again.");
+                    }
+                },
+                columns: [{
+                        data: "id"
+                    },
+                    {
+                        data: "title",
+                        title: "Project Title"
+                    },
+                    {
+                        data: "technologies",
+                        title: "Technologies Used"
+                    },
+                    {
+                        data: "status",
+                        title: "Status"
+                    },
+                    {
+                        data: null,
+                        title: "Action",
+                        orderable: false,
+                        render: function(data, type, row) {
+                            return `
+                                <a href="#" class="btn btn-info btn-sm view-project" data-id="${row.id}">View</a>
+                                <a href="#" class="btn btn-warning btn-sm edit-project" data-id="${row.id}">Edit</a>
+                                <button class="btn btn-danger btn-sm delete-project" data-id="${row.id}">Delete</button>
+                            `;
+                        }
+                    }
+                ],
+                language: {
+                    oPaginate: {
+                        sNext: '<i class="mdi mdi-chevron-right"></i>',
+                        sPrevious: '<i class="mdi mdi-chevron-left"></i>'
+                    }
+                },
+                dom: 'rt<"d-flex justify-content-between"ip>'
+            });
+
+            $(".dataTables_paginate").addClass("pagination-rounded"),
+
+                // Event listener for custom search input
+                $('#searchTableList').on('keyup', function() {
+                    table.ajax.reload(); // Reload data with the new search term
+                });
         })
     </script>
 @endsection

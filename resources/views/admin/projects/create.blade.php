@@ -78,9 +78,8 @@
                         <div class="mb-3">
                             <label class="form-label" for="project-status-input">Status</label>
                             <select class="form-select" id="project-status-input">
-                                <option value="Completed">Completed</option>
-                                <option value="Inprogress" selected>Inprogress</option>
-                                <option value="Delay">Delay</option>
+                                <option value="Completed" selected>Completed</option>
+                                <option value="In Progress">In Progress</option>
                             </select>
                             <div class="invalid-feedback">Please select project status.</div>
                         </div>
@@ -90,7 +89,6 @@
                             <select class="form-select" id="project-visibility-input">
                                 <option value="Private">Private</option>
                                 <option value="Public">Public</option>
-                                <option value="Team">Team</option>
                             </select>
                         </div>
                     </div>

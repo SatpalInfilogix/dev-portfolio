@@ -17,3 +17,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/authenticate', [UserController::class, 'authenticate'])->name('authenticate');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+/* Datatable Apis */
+Route::post('/get-projects', [ProjectController::class, 'getProjects'])->name('projects.get');

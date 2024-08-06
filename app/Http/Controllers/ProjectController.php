@@ -16,6 +16,51 @@ class ProjectController extends Controller
     }
 
     /**
+     * Display a listing of the resource in DataTable.
+     */
+    public function getProjects(Request $request)
+    {
+        $projects = [
+            [
+                'id' => 1, 
+                'title' => 'Project Alpha',
+                'technologies' => 'Laravel, Vue.js',
+                'status' => 'Completed'
+            ],
+            [
+                'id' => 2, 
+                'title' => 'Project Beta',
+                'technologies' => 'React, Node.js',
+                'status' => 'In Progress'
+            ],
+        ];
+        
+
+        // Get search value from request
+        $searchValue = $request->input('search.value', '');
+
+        // Filter projects based on search value
+        $filteredProjects = array_filter($projects, function ($project) use ($searchValue) {
+            return stripos($project['title'], $searchValue) !== false;
+        });
+
+        // Pagination logic
+        $start = intval($request->input('start', 0));
+        $length = intval($request->input('length', 10));
+        $paginatedProjects = array_slice($filteredProjects, $start, $length);
+
+        // Prepare response
+        $response = [
+            'draw' => intval($request->input('draw', 1)),
+            'recordsTotal' => count($projects),
+            'recordsFiltered' => count($filteredProjects),
+            'data' => $paginatedProjects
+        ];
+
+        return response()->json($response);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
