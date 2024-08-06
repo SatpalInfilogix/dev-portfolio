@@ -5,8 +5,7 @@
 @endsection
 
 @section('content')
-    <form id="createproject-form" autocomplete="off" class="needs-validation" novalidate>
-
+    <form id="createproject-form" autocomplete="off" novalidate>
         <div class="row">
             <div class="col-lg-8">
                 <div class="card">
@@ -18,7 +17,6 @@
 
                             <input id="projectname-input" name="projectname-input" type="text" class="form-control"
                                 placeholder="Enter project name..." required>
-                            <div class="invalid-feedback">Please enter a project name.</div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Project Image</label>
@@ -29,8 +27,7 @@
                                         <label for="project-image-input" class="mb-0" data-bs-toggle="tooltip"
                                             data-bs-placement="right" title="Select Image">
                                             <div class="avatar-xs">
-                                                <div
-                                                    class="avatar-title bg-light border rounded-circle text-muted cursor-pointer shadow font-size-16">
+                                                <div class="avatar-title bg-light border rounded-circle text-muted cursor-pointer shadow font-size-16">
                                                     <i class='bx bxs-image-alt'></i>
                                                 </div>
                                             </div>
@@ -40,8 +37,7 @@
                                     </div>
                                     <div class="avatar-lg">
                                         <div class="avatar-title bg-light rounded-circle">
-                                            <img src="#" id="projectlogo-img"
-                                                class="avatar-md h-auto rounded-circle" />
+                                            <img src="#" id="projectlogo-img" class="avatar-md h-auto rounded-circle" />
                                         </div>
                                     </div>
                                 </div>
@@ -49,9 +45,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="projectdesc-input" class="form-label">Project Description</label>
-                            <textarea class="form-control" id="projectdesc-input" rows="3" placeholder="Enter project description..."
-                                required></textarea>
-                            <div class="invalid-feedback">Please enter a project description.</div>
+                            <textarea class="form-control" id="projectdesc-input" rows="3" placeholder="Enter project description..."></textarea>
                         </div>
                         <div>
                             <label class="form-label">Attached Files</label>
@@ -120,18 +114,24 @@
     @push('scripts')
         <script>
             $(function() {
-                Dropzone.options.myDropzone = {
-                    // Configuration options
-                    url: "/upload", // The URL where files will be uploaded
-                    maxFilesize: 2, // Maximum file size in MB
-                    acceptedFiles: "image/*,application/pdf", // Accept only images and PDFs
-                    dictDefaultMessage: "Drag files here to upload", // Custom message
-                    init: function() {
-                        this.on("success", function(file, response) {
-                            console.log("File uploaded successfully");
-                        });
+                $("#project-image-input").on("change", function() {
+                    var $e = $("#projectlogo-img"),
+                        file = $(this)[0].files[0],
+                        reader = new FileReader();
+
+                    reader.onload = function() {
+                        $e.attr("src", reader.result);
+                    };
+
+                    if (file) {
+                        reader.readAsDataURL(file);
                     }
-                };
+                });
+
+                (Dropzone.autoDiscover = !1);
+                new Dropzone(".dropzone", {
+                    url: "https://httpbin.org/post"
+                });
             })
         </script>
     @endpush

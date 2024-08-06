@@ -28,7 +28,7 @@
                                 <img src="{{ asset('assets/images/users/profile-pic.jpg') }}" alt=""
                                     class="img-thumbnail rounded-circle">
                             </div>
-                            <h5 class="font-size-15 text-truncate">Henry Price</h5>
+                            <h5 class="font-size-15 text-truncate">{{ Auth()->user()->name }}</h5>
                             <p class="text-muted mb-0 text-truncate">UI/UX Designer</p>
                         </div>
 
